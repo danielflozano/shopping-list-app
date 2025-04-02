@@ -1,6 +1,6 @@
 import { doc, setDoc } from 'firebase/firestore';
 import logo from '../assets/icons/logoFacebook.png';
-import { signWithFacebook } from '../helpers/authService';
+import { signWithFacebook } from '../helpers';
 import { db } from '../assets/firebase-config/firebase-config';
 
 export const BtnFacebook = ({content}) => {

@@ -1,4 +1,4 @@
-import { signWithGoogle } from '../helpers/authService';
+import { signWithGoogle } from '../helpers';
 import logo from '../assets/icons/logoGoogleLight.png';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../assets/firebase-config/firebase-config';

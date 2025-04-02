@@ -1,35 +1,71 @@
-import { useEffect, useState } from "react";
-import { productService } from "../helpers";
-
-
+import { useState } from "react";
+import { useProducts } from "../contexts/ProductsContext";
+import { FaPlus } from "react-icons/fa6";
+import { ProductForm } from "../components/ProductForm";
 
 export const Products = () => {
 
-  const [products, setProducts] = useState([]);
+  const { filteredProducts, products, handleAddProduct, handleUpdateProduct, handleDeleteProduct } = useProducts();
+  const [showForm, setShowForm] = useState(false);
+  const [updateProduct, setUpdateProduct] = useState(null);
 
-  useEffect(() => {
-    productService().then((resp) => {
+  const handleOpenForm = (product = null) => {
+    setUpdateProduct(product);
+    setShowForm(true);
+    console.log(product);
+    
+  }
 
-      console.log(resp);
-      setProducts(resp);
-    });
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setUpdateProduct(null);
+  }
+
+  const handleSaveProduct = (product) => {
+    if(updateProduct) {
+      handleUpdateProduct(updateProduct.id, product);
+      console.log(product);      
+      console.log(updateProduct.id);
       
-    }, []);
+    } else {
+      handleAddProduct(product);
+    }
+    handleCloseForm();
+  }
   
+  if (showForm) {
+    return (
+      <ProductForm 
+      product={updateProduct}
+      onSave={handleSaveProduct}
+      onCancel={handleCloseForm}
+    />
+    )
+  }
 
   return (
     <div>
-      <h1>Lista de Productos</h1>
-      <ul>
+      <h1 className="text-2xl font-semibold mb-5">Lista de Productos</h1>
+      <div className="flex flex-col items-start">
           {
-            products.map((product) => (
-              <li key={product.id}>
-                <h3>{product.name}</h3>
-                <p>Categoria: {product.category}</p>
-              </li>
+            filteredProducts.map((product) => (
+              <button
+                key={product.id}
+                onClick={() => handleOpenForm(product)}
+                className="bg-editColor-4 w-full text-start p-4 mb-3 rounded-xl"
+              >
+                <h3 className="text-xl font-semibold text-editColor-1">{product.name}</h3>
+                {/* <p>Categoria: {product.category}</p> */}
+              </button>
             ))
           }
-      </ul>
+      </div>
+      <button
+        onClick={() => handleOpenForm()}
+        className="flex justify-center items-center fixed bottom-5 right-5 bg-editColor-1 text-3xl text-editColor-5 rounded-full w-14 h-14"
+      >
+        <FaPlus />
+      </button>
     </div>
   )
 };

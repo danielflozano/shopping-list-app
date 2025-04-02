@@ -1,6 +1,6 @@
 import { doc, setDoc } from 'firebase/firestore';
 import logo from '../assets/icons/githubLogoNegro.png'
-import { signWithGithub } from '../helpers/authService';
+import { signWithGithub } from '../helpers';
 import { db } from '../assets/firebase-config/firebase-config';
 
 export const BtnGithub = ({content}) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { FaArrowLeft, FaSearch } from "react-icons/fa"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Menu } from "./Menu";
-import { useAuth } from "../contexts/AuthContext";
+import { useProducts } from "../contexts/ProductsContext";
 
 const routeTitles = {
   '/home': 'Inicio',
@@ -22,17 +22,21 @@ const getTitle = (pathname) => routeTitles[pathname] || 'Aplicación';
 export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  // const [title, setTitle] = useState(getTitle(location.pathname));
   const [menuOpen, setMenuOpen] = useState(false);
+  const { handleSearchProducts, products, setFilteredProducts } = useProducts();
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const title = getTitle(location.pathname);
-  const { user, logout } = useAuth();
 
-  // useEffect(() => {
-  //   const newTitle = getTitle(location.pathname);
-  //   setTitle(newTitle);
-  //   document.title = newTitle;
-  // }, [location.pathname]);
 
+  useEffect(() => {
+    if (searchTerm.trim() === '') {
+      setFilteredProducts(products);
+    } else {
+      handleSearchProducts(searchTerm);
+    }
+  }, [searchTerm, products]);
+  
   return (
     <nav className="bg-editColor-1 text-editColor-5 p-4 flex items-center justify-between rounded-b-xl">
       <div className="flex items-center">
@@ -46,21 +50,34 @@ export const Navbar = () => {
             <FaArrowLeft />
           </button>
         )}
-        <span>{title}</span>
-        {/* <h3>{user.firstname} {user.lastname}</h3>
-        {user ? (
-          <h3>Bienvenido: {user.firstname} {user.lastname}</h3>
-        ) : (
-          <h3>...</h3>
-        )} */}
+        <span className="text-2xl">{title}</span>
       </div>
-      {location.pathname === '/products' && (
-        <button 
-          className="text-editColor-5 text-2xl"
-        >
-          <FaSearch />
-        </button>
-      )}      
+      {location.pathname === "/products" && (
+        <div className="flex items-center justify-end">
+          {showSearch ? (
+            <input
+              type="text"
+              placeholder="Buscar producto..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onBlur={() => {
+                if(searchTerm.trim() === '') {
+                  setShowSearch(false);
+                }
+              }}
+              className="border-none outline-none text-editColor-5 bg-editColor-2 px-2 py-1 rounded w-9/10"
+              autoFocus
+            />
+          ) : (
+            <button
+              onClick={() => setShowSearch(true)}
+              className="text-editColor-5 text-2xl"
+            >
+              <FaSearch />
+            </button>
+          )}
+        </div>
+      )}   
     </nav>
   )
 }

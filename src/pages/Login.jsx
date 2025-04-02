@@ -28,7 +28,7 @@ export const Login = () => {
 
   if (user) return <Navigate to='/home' />;
 
-  console.log(user);
+  // console.log(user);
   
 
   return (

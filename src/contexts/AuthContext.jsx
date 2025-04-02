@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
           const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
           if (userDoc.exists()) {
             setUser({ uid: firebaseUser.uid, ...userDoc.data() });
+            
           } else {
             console.warn('El documento del usuario no existe en firestore.');
             setUser(null);
