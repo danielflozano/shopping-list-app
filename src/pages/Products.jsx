@@ -5,7 +5,7 @@ import { ProductForm } from "../components/ProductForm";
 
 export const Products = () => {
 
-  const { filteredProducts, products, handleAddProduct, handleUpdateProduct, handleDeleteProduct } = useProducts();
+  const { filteredProducts, handleAddProduct, handleUpdateProduct, handleDeleteProduct } = useProducts();
   const [showForm, setShowForm] = useState(false);
   const [updateProduct, setUpdateProduct] = useState(null);
 
@@ -45,7 +45,7 @@ export const Products = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-5">Lista de Productos</h1>
+      {/* <h2 className="text-2xl font-semibold mb-5">Lista de Productos</h2> */}
       <div className="flex flex-col items-start">
           {
             filteredProducts.map((product) => (

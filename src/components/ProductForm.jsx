@@ -32,7 +32,7 @@ export const ProductForm = ({ product, onSave, onCancel }) => {
             type="number"
             placeholder='Precio'
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(parseFloat(e.target.value))}
             className='bg-editColor-4 border-none outline-none text-editColor-1 font-semibold px-3 py-1 rounded-md'
           />
           <label className='font-semibold'>Marca</label>
