@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useProducts } from "../contexts/ProductsContext";
 import { FaPlus } from "react-icons/fa6";
 import { ProductForm } from "../components/ProductForm";
+import { AddButton } from "../components/AddButton";
 
 export const Products = () => {
 
@@ -11,9 +12,7 @@ export const Products = () => {
 
   const handleOpenForm = (product = null) => {
     setUpdateProduct(product);
-    setShowForm(true);
-    console.log(product);
-    
+    setShowForm(true);    
   }
 
   const handleCloseForm = () => {
@@ -24,9 +23,6 @@ export const Products = () => {
   const handleSaveProduct = (product) => {
     if(updateProduct) {
       handleUpdateProduct(updateProduct.id, product);
-      console.log(product);      
-      console.log(updateProduct.id);
-      
     } else {
       handleAddProduct(product);
     }
@@ -60,12 +56,7 @@ export const Products = () => {
             ))
           }
       </div>
-      <button
-        onClick={() => handleOpenForm()}
-        className="flex justify-center items-center fixed bottom-5 right-5 bg-editColor-1 text-3xl text-editColor-5 rounded-full w-14 h-14"
-      >
-        <FaPlus />
-      </button>
+      <AddButton onClick={() => handleOpenForm()} />
     </div>
   )
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export const ProductForm = ({ product, onSave, onCancel }) => {
 
@@ -10,7 +10,7 @@ export const ProductForm = ({ product, onSave, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!name) return alert('El nombre es obligatorio');
+    if(!name) return alert('El nombre del producto es obligatorio');
     onSave({ name: name, brand: brand, price: price, unitM: unitM });
   }
   
@@ -24,7 +24,7 @@ export const ProductForm = ({ product, onSave, onCancel }) => {
             type="text"
             placeholder='Nombre'
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={ (e) => setName(e.target.value) }
             className='bg-editColor-4 border-none outline-none text-editColor-1 font-semibold px-3 py-1 rounded-md'
           />
           <label className='font-semibold'>Precio</label>
@@ -58,5 +58,5 @@ export const ProductForm = ({ product, onSave, onCancel }) => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
