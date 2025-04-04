@@ -10,21 +10,23 @@ export const Stores = () => {
   const [updateStore, setUpdateStore] = useState(null)
 
   const handleOpenForm = (store = null) => {
+
     setUpdateStore(store);
     setShowForm(true);
-
   }
 
   const handleCloseForm = () => {
+
     setShowForm(false);
     setUpdateStore(null);
   }
 
   const handleSaveStore = (store) => {
+
     if(updateStore) {
-      handleUpdateStore(updateStore.id, store)      
+      handleUpdateStore(updateStore.id, store);   
     } else {
-      handleAddStore(store)
+      handleAddStore(store);
     }
     handleCloseForm();
   }
@@ -40,21 +42,21 @@ export const Stores = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="flex flex-col items-start">
       {
         filteredStores.map((store) => (
           <button
             key={store.id}
             onClick={ () => handleOpenForm(store) }
-            className="bg-editColor-4 w-full text-start p-4 mb-3 rounded-xl"
+            className="bg-editColor-4 w-full text-start p-4 mb-1 rounded-xl"
           >
             <h3 className="text-xl font-semibold text-editColor-1">{store.name}</h3>
           </button>
         ))
       }
       </div>
-      <AddButton onClick={() => handleOpenForm()}/>
-    </div>
+      <AddButton onClick={ () => handleOpenForm() }/>
+    </>
   )
 };

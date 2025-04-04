@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { addStore, getStores, updateStore, deleteStore, getProducts } from '../helpers'
+import { addStore, getStores, updateStore, deleteStore } from '../helpers'
 
-const storesContext = createContext();
+const StoresContext = createContext();
 
 export const StoresProvider = ({ children }) => {
   const [stores, setStores] = useState([]);
@@ -46,16 +46,16 @@ export const StoresProvider = ({ children }) => {
   
   const handleDeleteStore = async(id) => {
     await deleteStore(id);
-    setStores(await getProducts())
+    setStores(await getStores());
   }
   
   return (
-    <storesContext.Provider
+    <StoresContext.Provider
       value={{ stores, filteredStores, setFilteredStores, loading, handleSearchStores, handleAddStore, handleUpdateStore, handleDeleteStore }}
     >
-      {children}
-    </storesContext.Provider>
+      { children }
+    </StoresContext.Provider>
   );
 };
 
-export const useStores = () => useContext(storesContext);
+export const useStores = () => useContext(StoresContext);

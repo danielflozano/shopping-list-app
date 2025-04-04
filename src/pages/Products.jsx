@@ -48,7 +48,7 @@ export const Products = () => {
               <button
                 key={product.id}
                 onClick={() => handleOpenForm(product)}
-                className="bg-editColor-4 w-full text-start p-4 mb-3 rounded-xl"
+                className="bg-editColor-4 w-full text-start p-4 mb-1 rounded-xl"
               >
                 <h3 className="text-xl font-semibold text-editColor-1">{product.name}</h3>
                 {/* <p>Categoria: {product.category}</p> */}
