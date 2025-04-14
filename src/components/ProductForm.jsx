@@ -1,17 +1,23 @@
 import { useState } from 'react'
+import { useAuth } from '../contexts/AuthContext';
+import { useCategories } from '../contexts/CategoriesContext';
 
 export const ProductForm = ({ product, onSave, onCancel }) => {
+
+  const { user } = useAuth();
+  const { categories } = useCategories();
 
   const [name, setName] = useState(product?.name || '');
   const [price, setPrice] = useState(product?.price || '');
   const [brand, setBrand] = useState(product?.brand || '');
+  const [category, setCategory] = useState(product?.category);
   const [unitM, setUnitM] = useState(product?.unitM || '');
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!name) return alert('El nombre del producto es obligatorio');
-    onSave({ name: name, brand: brand, price: price, unitM: unitM });
+    onSave({ userId:user.uid, name: name, brand: brand, price: price, unitM: unitM });
   }
   
   return (
@@ -43,6 +49,8 @@ export const ProductForm = ({ product, onSave, onCancel }) => {
             onChange={(e) => setBrand(e.target.value)}
             className='bg-editColor-4 border-none outline-none text-editColor-1 font-semibold px-3 py-1 rounded-md'
           />
+          <label className='font-semibold'>Categoria</label>
+          
           <label className='font-semibold'>Unidad de Medida</label>
           <input
             type="text"

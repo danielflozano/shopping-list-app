@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useProducts } from "../contexts/ProductsContext";
-import { FaPlus } from "react-icons/fa6";
 import { ProductForm } from "../components/ProductForm";
 import { AddButton } from "../components/AddButton";
 
