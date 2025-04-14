@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { MainLayout } from "../layouts/MainLayout";
 import { SplashScreen } from "../pages/SplashScreen";
-import { Home } from "../pages/home";
+import { Home } from "../pages/Home";
 import { Stores } from "../pages/Stores";
 import { Products } from "../pages/Products";
 import { Categories } from "../pages/Categories";
