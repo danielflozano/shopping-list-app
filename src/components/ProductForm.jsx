@@ -1,23 +1,26 @@
 import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext';
 import { useCategories } from '../contexts/CategoriesContext';
+import { useStores } from '../contexts/StoresContext';
 
 export const ProductForm = ({ product, onSave, onCancel }) => {
 
   const { user } = useAuth();
   const { categories } = useCategories();
+  const { stores } = useStores();
 
   const [name, setName] = useState(product?.name || '');
   const [price, setPrice] = useState(product?.price || '');
   const [brand, setBrand] = useState(product?.brand || '');
   const [category, setCategory] = useState(product?.category);
+  const [store, setStore] = useState(product?.store || '')
   const [unitM, setUnitM] = useState(product?.unitM || '');
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!name) return alert('El nombre del producto es obligatorio');
-    onSave({ userId:user.uid, name: name, brand: brand, price: price, unitM: unitM });
+    onSave({ userId:user.uid, name, brand, price, category, store, unitM });
   }
   
   return (
@@ -50,7 +53,31 @@ export const ProductForm = ({ product, onSave, onCancel }) => {
             className='bg-editColor-4 border-none outline-none text-editColor-1 font-semibold px-3 py-1 rounded-md'
           />
           <label className='font-semibold'>Categoria</label>
-          
+          <select
+          className='bg-editColor-4 border-none text-editColor-1/50 text- px-3 py-1 rounded-md outline-none'
+            value={category}
+            onChange={ (e) => setCategory(e.target.value) }
+          >
+            <option value="" hidden>Seleccione una Categoria</option>
+            {
+              categories.map((categorie) => (
+                <option key={categorie.id} value={categorie.id}>{categorie.name}</option>
+              ))
+            }
+          </select>
+          <label className='font-semibold'>Tienda</label>
+          <select
+          className='bg-editColor-4 border-none text-editColor-1/50 text- px-3 py-1 rounded-md outline-none'
+            value={store}
+            onChange={ (e) => setStore(e.target.value) }
+          >
+            <option value="" hidden>Seleccione una Tienda</option>
+            {
+              stores.map((store) => (
+                <option key={store.id} value={store.id}>{store.name}</option>
+              ))
+            }
+          </select>
           <label className='font-semibold'>Unidad de Medida</label>
           <input
             type="text"

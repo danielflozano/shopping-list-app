@@ -16,6 +16,8 @@ export const CategoriesProvider = ({ children }) => {
       setCategories(allCategories);
       setFilteredCategories(allCategories);
       setLoading(false);
+      console.log('Entro al useEffect');
+      
     }
 
     loadCategories();

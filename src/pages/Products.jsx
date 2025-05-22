@@ -27,6 +27,9 @@ export const Products = () => {
     }
     handleCloseForm();
   }
+
+  console.log("filteredProducts", filteredProducts);
+  console.log('Se re-renderiza products');
   
   if (showForm) {
     return (

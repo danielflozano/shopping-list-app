@@ -22,17 +22,10 @@ export const getProducts = async() => {
     const products = await Promise.all(querySnapshot.docs.map(async(productDoc) => {
 
       const productData = productDoc.data();
-      let categoryData = null;
-      if(productData.categories) {
-        const categoryDoc = await getDoc(productData.categories);
-        if (categoryDoc.exists()) {
-          categoryData = categoryDoc.data()
-        }
-      }
+
       return {
         id: productDoc.id,
         ...productData,
-        category: categoryData ? categoryData.name: 'Categoria desconocida',
       }
     }));
 
@@ -40,7 +33,7 @@ export const getProducts = async() => {
   } catch (error) {
 
     console.error('Error al obtener productos: ', error);
-    return [];  
+    return [];
   }
 };
 

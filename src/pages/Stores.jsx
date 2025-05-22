@@ -7,7 +7,8 @@ export const Stores = () => {
 
   const { filteredStores, handleAddStore, handleUpdateStore, handleDeleteStore } = useStores();
   const [showForm, setShowForm] = useState(false);
-  const [updateStore, setUpdateStore] = useState(null)
+  const [updateStore, setUpdateStore] = useState(null);
+  
 
   const handleOpenForm = (store = null) => {
 
@@ -30,6 +31,9 @@ export const Stores = () => {
     }
     handleCloseForm();
   }
+
+  console.log("filteredStores", filteredStores);
+  console.log('Se re-renderiza Stores');
 
   if(showForm) {
     return (

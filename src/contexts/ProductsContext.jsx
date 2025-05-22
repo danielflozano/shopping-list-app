@@ -14,6 +14,7 @@ export const ProductsProvider = ({ children }) => {
       setProducts(allProducts);
       setFilteredProducts(allProducts);
       setLoading(false);
+      console.log('Entro al useEffect');
     };
     loadProducts();
   }, []);
@@ -51,6 +52,7 @@ export const ProductsProvider = ({ children }) => {
     await deleteProduct(id);
     setProducts(await getProducts());
   }
+  
 
   return (
     <ProductsContext.Provider value={{ products, filteredProducts, setFilteredProducts, loading, handleSearchProducts, handleAddProduct, handleUpdateProduct, handleDeleteProduct }}>

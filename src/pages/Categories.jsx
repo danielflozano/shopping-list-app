@@ -32,7 +32,7 @@ export const Categories = () => {
     handleCloseForm();
   }
 
-  console.log(filteredCategories);
+  console.log("filteredCategories",filteredCategories);
   
 
   if(showForm) {

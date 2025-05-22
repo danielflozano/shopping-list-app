@@ -14,14 +14,16 @@ export const StoresProvider = ({ children }) => {
       setStores(allStores);
       setFilteredStores(allStores);
       setLoading(false);
-    }
+      console.log('Entro al useEffect');
+      
+    };
     loadStores();
   }, []);
 
   const handleSearchStores = (searchTerm) => {
     const normalizedSearchTerm = searchTerm.trim().toLowerCase();
   
-    if(normalizedSearchTerm === '') {
+    if(normalizedSearchTerm === "") {
       if(filteredStores.length !== stores.length) {
         setFilteredStores(stores);
       }
@@ -30,18 +32,24 @@ export const StoresProvider = ({ children }) => {
         store.name.toLowerCase().includes(normalizedSearchTerm)
       );
   
-      if(JSON.stringify(filtered) !== JSON.stringify(filteredStores)) setFilteredStores(filtered)
+      if(JSON.stringify(filtered) !== JSON.stringify(filteredStores)) {
+        setFilteredStores(filtered)
+      }        
     }
   };
   
   const handleAddStore = async(store) => {
     await addStore(store);
-    setStores(await getStores());
+    const updatedStores = await getStores();
+    setStores(updatedStores);
+    setFilteredStores(updatedStores);
   }
   
   const handleUpdateStore = async(id, newData) => {
     await updateStore(id, newData);
-    setStores(await getStores());
+    const updatedStores = await getStores();
+    setStores(updatedStores);
+    setFilteredStores(updatedStores);
   }
   
   const handleDeleteStore = async(id) => {

@@ -35,6 +35,8 @@ export const Navbar = () => {
     } else {
       handleSearchProducts(searchTerm);
     }
+    console.log('Ingresa al useEffect del navBar');
+    
   }, [searchTerm, products]);
   
   return (
